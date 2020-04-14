@@ -11,3 +11,16 @@ E:\AppC#\MayChamCong\MayChamCong\MayChamCong\obj\Debug\MayChamCong.pdb
 E:\AppC#\MayChamCong\MayChamCong\MayChamCong\bin\Debug\WebDriver.dll
 E:\AppC#\MayChamCong\MayChamCong\MayChamCong\bin\Debug\WebDriver.xml
 E:\AppC#\MayChamCong\MayChamCong\MayChamCong\obj\Debug\MayChamCong.csproj.CopyComplete
+E:\AppC#\MayChamCong\MayChamCong\SoftwareMayChamCong\MayChamCong\bin\Debug\MayChamCong.exe.config
+E:\AppC#\MayChamCong\MayChamCong\SoftwareMayChamCong\MayChamCong\bin\Debug\MayChamCong.exe
+E:\AppC#\MayChamCong\MayChamCong\SoftwareMayChamCong\MayChamCong\bin\Debug\MayChamCong.pdb
+E:\AppC#\MayChamCong\MayChamCong\SoftwareMayChamCong\MayChamCong\bin\Debug\WebDriver.dll
+E:\AppC#\MayChamCong\MayChamCong\SoftwareMayChamCong\MayChamCong\bin\Debug\WebDriver.xml
+E:\AppC#\MayChamCong\MayChamCong\SoftwareMayChamCong\MayChamCong\obj\Debug\MayChamCong.Form1.resources
+E:\AppC#\MayChamCong\MayChamCong\SoftwareMayChamCong\MayChamCong\obj\Debug\MayChamCong.Properties.Resources.resources
+E:\AppC#\MayChamCong\MayChamCong\SoftwareMayChamCong\MayChamCong\obj\Debug\MayChamCong.csproj.GenerateResource.cache
+E:\AppC#\MayChamCong\MayChamCong\SoftwareMayChamCong\MayChamCong\obj\Debug\MayChamCong.csproj.CoreCompileInputs.cache
+E:\AppC#\MayChamCong\MayChamCong\SoftwareMayChamCong\MayChamCong\obj\Debug\MayChamCong.csproj.CopyComplete
+E:\AppC#\MayChamCong\MayChamCong\SoftwareMayChamCong\MayChamCong\obj\Debug\MayChamCong.exe
+E:\AppC#\MayChamCong\MayChamCong\SoftwareMayChamCong\MayChamCong\obj\Debug\MayChamCong.pdb
+E:\AppC#\MayChamCong\MayChamCong\SoftwareMayChamCong\MayChamCong\obj\Debug\MayChamCong.csprojAssemblyReference.cache

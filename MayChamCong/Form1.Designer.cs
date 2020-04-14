@@ -34,14 +34,14 @@
             this.txbIpAddress = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.txtUID = new System.Windows.Forms.TextBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.btnRegistration = new System.Windows.Forms.Button();
-            this.label5 = new System.Windows.Forms.Label();
-            this.txtNameStaff = new System.Windows.Forms.TextBox();
             this.btnThongKeMonth = new System.Windows.Forms.Button();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.txtNameStaff = new System.Windows.Forms.TextBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.btnRegistration = new System.Windows.Forms.Button();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.txtUID = new System.Windows.Forms.TextBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
@@ -65,11 +65,11 @@
             // 
             // btnGetData
             // 
-            this.btnGetData.Location = new System.Drawing.Point(9, 66);
+            this.btnGetData.Location = new System.Drawing.Point(0, 66);
             this.btnGetData.Name = "btnGetData";
-            this.btnGetData.Size = new System.Drawing.Size(75, 23);
+            this.btnGetData.Size = new System.Drawing.Size(91, 23);
             this.btnGetData.TabIndex = 2;
-            this.btnGetData.Text = "Lấy dữ liệu";
+            this.btnGetData.Text = "Thống kê ngày";
             this.btnGetData.UseVisualStyleBackColor = true;
             this.btnGetData.Click += new System.EventHandler(this.BtnGetData_Click);
             // 
@@ -104,6 +104,16 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Lấy dữ liệu chấm công";
             // 
+            // btnThongKeMonth
+            // 
+            this.btnThongKeMonth.Location = new System.Drawing.Point(102, 66);
+            this.btnThongKeMonth.Name = "btnThongKeMonth";
+            this.btnThongKeMonth.Size = new System.Drawing.Size(98, 23);
+            this.btnThongKeMonth.TabIndex = 10;
+            this.btnThongKeMonth.Text = "Thống kê tháng";
+            this.btnThongKeMonth.UseVisualStyleBackColor = true;
+            this.btnThongKeMonth.Click += new System.EventHandler(this.BtnThongKeMonth_Click);
+            // 
             // groupBox2
             // 
             this.groupBox2.Controls.Add(this.txtNameStaff);
@@ -119,30 +129,21 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Đăng ký thẻ";
             // 
-            // txtUID
+            // txtNameStaff
             // 
-            this.txtUID.Enabled = false;
-            this.txtUID.Location = new System.Drawing.Point(74, 13);
-            this.txtUID.Name = "txtUID";
-            this.txtUID.Size = new System.Drawing.Size(120, 20);
-            this.txtUID.TabIndex = 0;
+            this.txtNameStaff.Location = new System.Drawing.Point(74, 39);
+            this.txtNameStaff.Name = "txtNameStaff";
+            this.txtNameStaff.Size = new System.Drawing.Size(120, 20);
+            this.txtNameStaff.TabIndex = 5;
             // 
-            // label3
+            // label5
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(7, 16);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(40, 13);
-            this.label3.TabIndex = 2;
-            this.label3.Text = "Mã thẻ";
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(7, 49);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(0, 13);
-            this.label4.TabIndex = 2;
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(7, 46);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(39, 13);
+            this.label5.TabIndex = 4;
+            this.label5.Text = "Họ tên";
             // 
             // btnRegistration
             // 
@@ -154,31 +155,30 @@
             this.btnRegistration.UseVisualStyleBackColor = true;
             this.btnRegistration.Click += new System.EventHandler(this.BtnRegistration_Click);
             // 
-            // label5
+            // label4
             // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(7, 46);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(39, 13);
-            this.label5.TabIndex = 4;
-            this.label5.Text = "Họ tên";
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(7, 49);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(0, 13);
+            this.label4.TabIndex = 2;
             // 
-            // txtNameStaff
+            // label3
             // 
-            this.txtNameStaff.Location = new System.Drawing.Point(74, 39);
-            this.txtNameStaff.Name = "txtNameStaff";
-            this.txtNameStaff.Size = new System.Drawing.Size(120, 20);
-            this.txtNameStaff.TabIndex = 5;
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(7, 16);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(40, 13);
+            this.label3.TabIndex = 2;
+            this.label3.Text = "Mã thẻ";
             // 
-            // btnThongKeMonth
+            // txtUID
             // 
-            this.btnThongKeMonth.Location = new System.Drawing.Point(119, 66);
-            this.btnThongKeMonth.Name = "btnThongKeMonth";
-            this.btnThongKeMonth.Size = new System.Drawing.Size(75, 23);
-            this.btnThongKeMonth.TabIndex = 10;
-            this.btnThongKeMonth.Text = "Thống kê";
-            this.btnThongKeMonth.UseVisualStyleBackColor = true;
-            this.btnThongKeMonth.Click += new System.EventHandler(this.BtnThongKeMonth_Click);
+            this.txtUID.Enabled = false;
+            this.txtUID.Location = new System.Drawing.Point(74, 13);
+            this.txtUID.Name = "txtUID";
+            this.txtUID.Size = new System.Drawing.Size(120, 20);
+            this.txtUID.TabIndex = 0;
             // 
             // Form1
             // 

@@ -343,6 +343,7 @@ namespace MayChamCong
                 {
                     string timeIn = "";
                     string timeOut = "";
+                    string thoiGianMuon = "";
                     int countSoLanTonTai = 0;
                     //Lay trang thai
                     foreach (DuLieuLayTuThietBi item2 in arrayList)
@@ -354,15 +355,47 @@ namespace MayChamCong
                             {
                                 timeIn = item.Gio.ToString();
                                 string[] thoigian = timeIn.Split(':');
-                                if ((Int16.Parse(thoigian[0].ToString()) >= 8 && Int16.Parse(thoigian[1].ToString()) > 30) || (Int16.Parse(thoigian[0].ToString()) >= 13 && Int16.Parse(thoigian[1].ToString()) > 30))
+                                if (Int16.Parse(thoigian[0].ToString()) >= 8 && Int16.Parse(thoigian[1].ToString()) > 30)
                                 {
-                                    statusGo = "Đi muộn";
+                                    statusGo += "Đi muộn ";
+                                }else if (Int16.Parse(thoigian[0].ToString()) > 8 && Int16.Parse(thoigian[0].ToString()) < 12)
+                                {
+                                    //int timeLate = (Int16.Parse(thoigian[0].ToString()) - 8)*60 + (Int16.Parse(thoigian[1].ToString()) - 30);
+                                    //thoiGianMuon = timeLate.ToString();
+                                    statusGo += "Đi muộn ";
+                                }else if (Int16.Parse(thoigian[0].ToString()) >= 13 && Int16.Parse(thoigian[1].ToString()) > 30)
+                                {
+                                    statusGo += "Đi muộn ";
+                                }else if (Int16.Parse(thoigian[0].ToString()) > 13 && Int16.Parse(thoigian[0].ToString()) < 18)
+                                {
+                                    //int timeLate = (Int16.Parse(thoigian[0].ToString()) - 8) * 60 + (Int16.Parse(thoigian[1].ToString()) - 30);
+                                    statusGo += "Đi muộn ";
+                                    //thoiGianMuon = timeLate.ToString();
                                 }
                             }
                             if (countSoLanTonTai > 1)
                             {
                                 timeOut = item2.Gio.ToString();
                             }
+                            
+                        }
+                    }
+                    if(countSoLanTonTai == 1)
+                    {
+                        string[] thoigian = timeIn.Split(':');
+                        if (Int16.Parse(thoigian[0].ToString()) < 18)
+                        {
+                            statusGo += "Không Check OUT";
+                        }
+                        else
+                        {
+                            timeOut = timeIn;
+                            timeIn = "";
+                            statusGo += " Không Check IN";
+                        }
+                        if(Int16.Parse(thoigian[0].ToString()) > 8)
+                        {
+
                         }
                     }
                     //Lay du lieu duy nhat
@@ -427,156 +460,7 @@ namespace MayChamCong
         {
             txtUID.Text = dataUID;
         }
-        public class DataInToFileExcelFull
-        {
-            private string maUID;
-            private string hoTen;
-            private string ngay;
-            private string thoiGianCheckIn;
-            private string thoiGianCheckOut;
-            private string trangThaiDiLam;
-
-            public string MaUID
-            {
-                get { return maUID; }
-                set { maUID = value; }
-            }
-            public string Ten
-            {
-                get { return hoTen; }
-                set { hoTen = value; }
-            }
-            public string Ngay
-            {
-                get { return ngay; }
-                set { ngay = value; }
-            }
-            public string GioCheckIn
-            {
-                get { return thoiGianCheckIn; }
-                set { thoiGianCheckIn = value; }
-            }
-            public string GioCheckOut
-            {
-                get { return thoiGianCheckOut; }
-                set { thoiGianCheckOut = value; }
-            }
-            public string TrangThai
-            {
-                get { return trangThaiDiLam; }
-                set { trangThaiDiLam = value; }
-            }
-
-            public DataInToFileExcelFull(string UIDStaff,string NameStaff, string date, string timeIn, string timeOut, string trangThai)
-            {
-                this.MaUID = UIDStaff;
-                this.Ten = NameStaff;
-                this.Ngay = date;
-                this.GioCheckIn = timeIn;
-                this.GioCheckOut = timeOut;
-                this.TrangThai = trangThai;
-            }
-        }
-        public class DataInToFileExcelChuaCoTen
-        {
-            private string maUID;
-            private string ngay;
-            private string thoiGianCheckIn;
-            private string thoiGianCheckOut;
-            private string trangThaiDiLam;
-
-            public string MaUID
-            {
-                get { return maUID; }
-                set { maUID = value; }
-            }
-
-            public string Ngay
-            {
-                get { return ngay; }
-                set { ngay = value; }
-            }
-            public string GioCheckIn
-            {
-                get { return thoiGianCheckIn; }
-                set { thoiGianCheckIn = value; }
-            }
-            public string GioCheckOut
-            {
-                get { return thoiGianCheckOut; }
-                set { thoiGianCheckOut = value; }
-            }
-            public string TrangThai
-            {
-                get { return trangThaiDiLam; }
-                set { trangThaiDiLam = value; }
-            }
-
-            public DataInToFileExcelChuaCoTen(string UIDStaff, string date, string timeIn, string timeOut, string trangThai)
-            {
-                this.MaUID = UIDStaff;
-                this.Ngay = date;
-                this.GioCheckIn = timeIn;
-                this.GioCheckOut = timeOut;
-                this.TrangThai = trangThai;
-            }
-        }
-
-        public class DuLieuLayTuThietBi
-        {
-            private string maUID;
-            private string ngay;
-            private string gio;
-
-            public string MaUID
-            {
-                get { return maUID; }
-                set { maUID = value; }
-            }
-
-            public string Ngay
-            {
-                get { return ngay; }
-                set { ngay = value; }
-            }
-            public string Gio
-            {
-                get { return gio; }
-                set { gio = value; }
-            }
-
-            public DuLieuLayTuThietBi(string UIDStaff, string date, string time)
-            {
-                this.MaUID = UIDStaff;
-                this.Ngay = date;
-                this.Gio = time;
-            }
-        }
-
-        public class CoSoDuLieu
-        {
-            private string maUID;
-            private string hoTen;
-
-            public string MaUID
-            {
-                get { return maUID; }
-                set { maUID = value; }
-            }
-
-            public string Ten
-            {
-                get { return hoTen; }
-                set { hoTen = value; }
-            }
-
-            public CoSoDuLieu(string UIDStaff, string nameStaff)
-            {
-                this.MaUID = UIDStaff;
-                this.Ten = nameStaff;
-            }
-        }
-
+       
         private void BtnRegistration_Click(object sender, EventArgs e)
         {
             if (txtUID.Text.Equals("") || txtNameStaff.Text.Equals(""))
