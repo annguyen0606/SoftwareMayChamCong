@@ -295,7 +295,7 @@ namespace MayChamCong
                         {
                             kiemTraCoCheckInOutKhong = true;
                             danhSachDayDu.Add(new DataInToFileExcelFull("'" + item2.MaUID.ToString(), item.Ten.ToString(), item2.Ngay.ToString(),
-                                item2.GioCheckIn.ToString(), item2.GioCheckOut.ToString(), item2.TrangThai.ToString()));
+                                item2.GioCheckIn.ToString(), item2.GioCheckOut.ToString(), item2.TrangThai.ToString(),item2.PhutMuon.ToString()));
                         }
                         else
                         {
@@ -304,7 +304,7 @@ namespace MayChamCong
                     if(kiemTraCoCheckInOutKhong == false)
                     {
                         danhSachDayDu.Add(new DataInToFileExcelFull("'" + item.MaUID.ToString(), item.Ten.ToString(), cbDateOfMonth.Text.ToString(),
-                            "", "", "Không Check In / Check Out"));
+                            "", "", "Không Check In / Check Out",""));
                     }
                     
                 }
@@ -355,22 +355,29 @@ namespace MayChamCong
                             {
                                 timeIn = item.Gio.ToString();
                                 string[] thoigian = timeIn.Split(':');
-                                if (Int16.Parse(thoigian[0].ToString()) >= 8 && Int16.Parse(thoigian[1].ToString()) > 30)
+                                if (Int16.Parse(thoigian[0].ToString()) >= 8 && Int16.Parse(thoigian[1].ToString()) > 30 && Int16.Parse(thoigian[0].ToString()) < 12)
                                 {
+                                    int timeLate = (Int16.Parse(thoigian[0].ToString()) - 8)*60 + (Int16.Parse(thoigian[1].ToString()) - 30);
+                                    thoiGianMuon = timeLate.ToString();
                                     statusGo += "Đi muộn ";
-                                }else if (Int16.Parse(thoigian[0].ToString()) > 8 && Int16.Parse(thoigian[0].ToString()) < 12)
+                                }
+                                else if (Int16.Parse(thoigian[0].ToString()) > 8 && Int16.Parse(thoigian[0].ToString()) < 12)
                                 {
-                                    //int timeLate = (Int16.Parse(thoigian[0].ToString()) - 8)*60 + (Int16.Parse(thoigian[1].ToString()) - 30);
-                                    //thoiGianMuon = timeLate.ToString();
+                                    int timeLate = (Int16.Parse(thoigian[0].ToString()) - 8)*60 + (Int16.Parse(thoigian[1].ToString()) - 30);
+                                    thoiGianMuon = timeLate.ToString();
                                     statusGo += "Đi muộn ";
-                                }else if (Int16.Parse(thoigian[0].ToString()) >= 13 && Int16.Parse(thoigian[1].ToString()) > 30)
+                                }
+                                else if (Int16.Parse(thoigian[0].ToString()) >= 13 && Int16.Parse(thoigian[1].ToString()) > 30)
                                 {
+                                    int timeLate = (Int16.Parse(thoigian[0].ToString()) - 13)*60 + (Int16.Parse(thoigian[1].ToString()) - 30);
+                                    thoiGianMuon = timeLate.ToString();
                                     statusGo += "Đi muộn ";
-                                }else if (Int16.Parse(thoigian[0].ToString()) > 13 && Int16.Parse(thoigian[0].ToString()) < 18)
+                                }
+                                else if (Int16.Parse(thoigian[0].ToString()) > 13 && Int16.Parse(thoigian[0].ToString()) < 18)
                                 {
-                                    //int timeLate = (Int16.Parse(thoigian[0].ToString()) - 8) * 60 + (Int16.Parse(thoigian[1].ToString()) - 30);
+                                    int timeLate = (Int16.Parse(thoigian[0].ToString()) - 13) * 60 + (Int16.Parse(thoigian[1].ToString()) - 30);
                                     statusGo += "Đi muộn ";
-                                    //thoiGianMuon = timeLate.ToString();
+                                    thoiGianMuon = timeLate.ToString();
                                 }
                             }
                             if (countSoLanTonTai > 1)
@@ -408,7 +415,7 @@ namespace MayChamCong
                     }
                     if(kiemTraSuTonTai == false)
                     {
-                        addDataClass.Add(new DataInToFileExcelChuaCoTen(item.MaUID.ToString(), item.Ngay.ToString(), timeIn, timeOut, statusGo));
+                        addDataClass.Add(new DataInToFileExcelChuaCoTen(item.MaUID.ToString(), item.Ngay.ToString(), timeIn, timeOut, statusGo,thoiGianMuon));
                     }
                 }
             }
@@ -423,7 +430,8 @@ namespace MayChamCong
             cExcel.Cells[1, 3] = "Ngày";
             cExcel.Cells[1, 4] = "CheckIn";
             cExcel.Cells[1, 5] = "CheckOut";
-            cExcel.Cells[1, 6] = "Trạng Thái";
+            cExcel.Cells[1, 6] = "Trạng thái";
+            cExcel.Cells[1, 7] = "Số phút";
             int i = 2;
             foreach(DataInToFileExcelFull item in arrayList)
             {
@@ -433,6 +441,7 @@ namespace MayChamCong
                 cExcel.Cells[i, 4] = item.GioCheckIn.ToString();
                 cExcel.Cells[i, 5] = item.GioCheckOut.ToString();
                 cExcel.Cells[i, 6] = item.TrangThai.ToString();
+                cExcel.Cells[i, 7] = item.PhutMuon.ToString();
                 i++;
             }
             
@@ -510,13 +519,15 @@ namespace MayChamCong
 
         private void BtnThongKeMonth_Click(object sender, EventArgs e)
         {
-            for (int k = 0; k < 31; k++)
+            for (int k = 1; k < 31; k++)
             {
                 DateTime myDate = DateTime.Now;
                 String date = myDate.ToString("MM/yyyy");
-                String ngayThang = (k + 1).ToString() +"/"+date;
+                String dateYear = myDate.ToString("yyyy");
+                String dateMonth = myDate.ToString("MM");
+                String ngayThang = dateMonth+"/"+(k).ToString() +"/"+dateYear;
                 String url = "http://" + txbIpAddress.Text.ToString() + "/ngay";
-                if (k < 9)
+                if (k < 10)
                 {
                     url += "0" + k.ToString();
                 }
@@ -528,57 +539,66 @@ namespace MayChamCong
                 if (!txbIpAddress.Text.Equals(""))
                 {
                     String duLieuChamCong = GetDataFromUrl(url);
-                    string[] dataChamCong = duLieuChamCong.Split(',');
-
-                    for (int i = 0; i < dataChamCong.Length - 1; i += 3)
+                    if (!duLieuChamCong.Trim().Equals(""))
                     {
-                        addDataClass.Add(new DuLieuLayTuThietBi(dataChamCong[i].ToString(), dataChamCong[i + 1].ToString(), dataChamCong[i + 2]));
-                    }
-                    ArrayList danhSachChuaCoTen = XuLyDuLieuDauVao(addDataClass);
-                    ArrayList danhSachCoSoDuLieu = LayDuLieuCSDL();
-                    ArrayList danhSachDayDu = new ArrayList();
+                        string[] dataChamCong = duLieuChamCong.Split(',');
 
-                    foreach (CoSoDuLieu item in danhSachCoSoDuLieu)
-                    {
-                        bool kiemTraCoCheckInOutKhong = false;
-                        foreach (DataInToFileExcelChuaCoTen item2 in danhSachChuaCoTen)
+                        for (int i = 0; i < dataChamCong.Length - 1; i += 3)
                         {
-                            if (item.MaUID.ToString().Equals(item2.MaUID.ToString()))
+                            addDataClass.Add(new DuLieuLayTuThietBi(dataChamCong[i].ToString(), dataChamCong[i + 1].ToString(), dataChamCong[i + 2]));
+                        }
+                        ArrayList danhSachChuaCoTen = XuLyDuLieuDauVao(addDataClass);
+                        ArrayList danhSachCoSoDuLieu = LayDuLieuCSDL();
+                        ArrayList danhSachDayDu = new ArrayList();
+
+                        foreach (CoSoDuLieu item in danhSachCoSoDuLieu)
+                        {
+                            bool kiemTraCoCheckInOutKhong = false;
+                            foreach (DataInToFileExcelChuaCoTen item2 in danhSachChuaCoTen)
                             {
-                                kiemTraCoCheckInOutKhong = true;
-                                danhSachDayDu.Add(new DataInToFileExcelFull("'" + item2.MaUID.ToString(), item.Ten.ToString(), item2.Ngay.ToString(),
-                                    item2.GioCheckIn.ToString(), item2.GioCheckOut.ToString(), item2.TrangThai.ToString()));
+                                if (item.MaUID.ToString().Equals(item2.MaUID.ToString()))
+                                {
+                                    kiemTraCoCheckInOutKhong = true;
+                                    danhSachDayDu.Add(new DataInToFileExcelFull("'" + item2.MaUID.ToString(), item.Ten.ToString(), item2.Ngay.ToString(),
+                                        item2.GioCheckIn.ToString(), item2.GioCheckOut.ToString(), item2.TrangThai.ToString(), item2.PhutMuon.ToString()));
+                                }
+                                else
+                                {
+                                }
+                            }
+                            if (kiemTraCoCheckInOutKhong == false)
+                            {
+                                danhSachDayDu.Add(new DataInToFileExcelFull("'" + item.MaUID.ToString(), item.Ten.ToString(), ngayThang,
+                                    "", "", "Không Check In / Check Out", ""));
+                            }
+                        }
+                        foreach (DataInToFileExcelFull item5 in danhSachDayDu)
+                        {
+                            if (File.Exists(dirPath + "/data.txt"))
+                            {
+                                using (StreamWriter sw = File.AppendText(dirPath + "/data.txt"))
+                                {
+                                    sw.WriteLine(item5.MaUID.ToString() + "," + item5.Ten.ToString() + ","
+                                        + item5.Ngay.ToString() + "," + item5.GioCheckIn.ToString() + ","
+                                        + item5.GioCheckOut.ToString() + "," + item5.TrangThai.ToString() + "," + item5.PhutMuon.ToString());
+                                    sw.Close();
+                                }
                             }
                             else
                             {
+
                             }
-                        }
-                        if (kiemTraCoCheckInOutKhong == false)
-                        {
-                            danhSachDayDu.Add(new DataInToFileExcelFull("'" + item.MaUID.ToString(), item.Ten.ToString(), ngayThang,
-                                "", "", "Không Check In / Check Out"));
                         }
                     }
-                    foreach(DataInToFileExcelFull item5 in danhSachDayDu)
+                    else
                     {
-                        if (File.Exists(dirPath + "/data.txt"))
-                        {
-                            using (StreamWriter sw = File.AppendText(dirPath + "/data.txt"))
-                            {
-                                sw.WriteLine(item5.MaUID.ToString()+","+item5.Ten.ToString()+","
-                                    +item5.Ngay.ToString()+","+item5.GioCheckIn.ToString()+","
-                                    +item5.GioCheckOut.ToString()+","+item5.TrangThai.ToString());
-                                sw.Close();
-                            }
-                        }
-                        else
-                        {
-                            
-                        }
+
                     }
                 }
                 else
                 {
+                    MessageBox.Show("Bạn chưa nhập địa chỉ IP!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    break;
                 }
 
             }
@@ -601,7 +621,7 @@ namespace MayChamCong
                     {
                         string[] duLieuStaff = lines[i].Split(',');
                         CoSoDuLieu.Add(new DataInToFileExcelFull(duLieuStaff[0].ToString(), duLieuStaff[1].ToString(),duLieuStaff[2].ToString(),
-                            duLieuStaff[3].ToString(),duLieuStaff[4].ToString(),duLieuStaff[5].ToString()));
+                            duLieuStaff[3].ToString(),duLieuStaff[4].ToString(),duLieuStaff[5].ToString(),duLieuStaff[6].ToString()));
                     }
                 }
             }

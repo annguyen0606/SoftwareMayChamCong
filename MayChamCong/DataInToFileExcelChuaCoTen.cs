@@ -13,6 +13,7 @@ namespace MayChamCong
         private string thoiGianCheckIn;
         private string thoiGianCheckOut;
         private string trangThaiDiLam;
+        private string soPhutMuon;
         
         public string MaUID
         {
@@ -41,13 +42,20 @@ namespace MayChamCong
             set { trangThaiDiLam = value; }
         }
 
-        public DataInToFileExcelChuaCoTen(string UIDStaff, string date, string timeIn, string timeOut, string trangThai)
+        public string PhutMuon
+        {
+            get { return soPhutMuon; }
+            set { soPhutMuon = value; }
+        }
+
+        public DataInToFileExcelChuaCoTen(string UIDStaff, string date, string timeIn, string timeOut, string trangThai, string phut)
         {
             this.MaUID = UIDStaff;
             this.Ngay = date;
             this.GioCheckIn = timeIn;
             this.GioCheckOut = timeOut;
             this.TrangThai = trangThai;
+            this.PhutMuon = phut;
         }
     }
 }
