@@ -345,6 +345,10 @@ namespace MayChamCong
                     string timeOut = "";
                     string thoiGianMuon = "";
                     int countSoLanTonTai = 0;
+                    string thuTrongTuan = "";
+                    string ngayCheck = "";
+                    ngayCheck = item.Ngay.ToString();
+                    string[] thu = item.Ngay.ToString().Split('-');
                     //Lay trang thai
                     foreach (DuLieuLayTuThietBi item2 in arrayList)
                     {
@@ -387,22 +391,46 @@ namespace MayChamCong
                             
                         }
                     }
+                    DateTime dt = new DateTime(int.Parse(thu[0]),int.Parse(thu[1]),int.Parse(thu[2]));
+                    thuTrongTuan = dt.DayOfWeek.ToString();
                     if(countSoLanTonTai == 1)
                     {
                         string[] thoigian = timeIn.Split(':');
-                        if (Int16.Parse(thoigian[0].ToString()) < 18)
+                        if (thuTrongTuan.Equals("Saturday"))
                         {
-                            statusGo += "Không Check OUT";
+                            if (Int16.Parse(thoigian[0].ToString()) < 12)
+                            {
+                                statusGo += "Không Check OUT";
+                            }
+                            else
+                            {
+                                timeOut = timeIn;
+                                timeIn = "";
+                                statusGo = "Không Check IN";
+                                thoiGianMuon = "";
+                            }
+                            if (Int16.Parse(thoigian[0].ToString()) > 8)
+                            {
+
+                            }
                         }
                         else
                         {
-                            timeOut = timeIn;
-                            timeIn = "";
-                            statusGo += " Không Check IN";
-                        }
-                        if(Int16.Parse(thoigian[0].ToString()) > 8)
-                        {
+                            if (Int16.Parse(thoigian[0].ToString()) < 16)
+                            {
+                                statusGo += "Không Check OUT";
+                            }
+                            else
+                            {
+                                timeOut = timeIn;
+                                timeIn = "";
+                                statusGo = "Không Check IN";
+                                thoiGianMuon = "";
+                            }
+                            if (Int16.Parse(thoigian[0].ToString()) > 8)
+                            {
 
+                            }
                         }
                     }
                     //Lay du lieu duy nhat
@@ -415,7 +443,7 @@ namespace MayChamCong
                     }
                     if(kiemTraSuTonTai == false)
                     {
-                        addDataClass.Add(new DataInToFileExcelChuaCoTen(item.MaUID.ToString(), item.Ngay.ToString(), timeIn, timeOut, statusGo,thoiGianMuon));
+                        addDataClass.Add(new DataInToFileExcelChuaCoTen(item.MaUID.ToString(), ngayCheck, timeIn, timeOut, statusGo,thoiGianMuon));
                     }
                 }
             }
